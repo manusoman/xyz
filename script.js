@@ -25,7 +25,6 @@
     setInterval(function() {
         switchTextNColor();
         elements.body.style.backgroundColor = getRandomColor();
-        context.strokeStyle = getRandomColor();
     }, blinkSpeed);
 
     setInterval(fourier, 40);
