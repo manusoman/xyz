@@ -50,7 +50,8 @@
 
         setCordinatePlane('cartitian');
 
-        let wind = 0;
+        let wind = 0,
+            speed = 0.001;
 
         function fourier() {
             clearScreen();
@@ -58,18 +59,20 @@
             context.strokeStyle = '#ffffff';
             context.lineWidth = 1;
             context.beginPath();
-            context.moveTo(5 * unit, 0);
+            context.moveTo(3 * unit, 0);
 
             for(let c = 0; c < 10 * unit; c += 0.2) {
                 let _c = c / unit,
-                    sc = Math.sin(TwoPI * _c) * 2,
+                    sc = -Math.cos(TwoPI * _c) * 2,
                     p = Complex.exp(TwoPI * wind * _c).multiply(sc + 5);
 
                 context.lineTo(p.r * unit, p.i * unit);
             }
 
             context.stroke();
-            wind += 0.001;
+            wind += speed;
+
+            if(wind > 5 || wind < -5) speed = -speed;
         }
 
 
