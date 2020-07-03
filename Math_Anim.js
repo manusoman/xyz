@@ -44,16 +44,15 @@ mathtrix.config = {
     let width = canvas_ele.width = window.innerWidth,
         height = canvas_ele.height = window.innerHeight,
         w = width / 2,
-        h = height / 2;
+        h = height / 2,
+        clRectStart = [0, 0];
 
 
     const canvas = {
         get context() { return context; },
 
-        get xMin() { return -w; },
-        get xMax() { return w; },
-        get yMin() { return -h; },
-        get yMax() { return h; },
+        get width() { return width; },
+        get height() { return height; },
 
         scale : function(x, y) {
             context.scale(x, y);
@@ -117,11 +116,13 @@ mathtrix.config = {
                 case 'cartitian':
                     context.translate(w, h);
                     context.scale(1, -1);
+                    clRectStart = [-w, -h];
                     break;
 
                 case 'cartitian-Q1':
-                    context.translate(100, height - 100);
+                    context.translate(0, height);
                     context.scale(1, -1);
+                    clRectStart = [0, 0];
                     break;
                 
                 default:
@@ -130,7 +131,7 @@ mathtrix.config = {
 
 
         clearScreen : function() {
-            context.clearRect(-w, -h, width, height);
+            context.clearRect(clRectStart[0], clRectStart[1], width, height);
         }
     };
 
